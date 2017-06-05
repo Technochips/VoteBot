@@ -90,7 +90,12 @@ fs.readFile('./.token', 'utf8', function(err, data)
 
 function save_upvote()
 {
-	fs.writeFile('.upvote', upvote, (err) =>
+	var r = '';
+	for(var i = 0; i < Object.keys(upvote).length; i++)
+	{
+		r = r + Object.keys(upvote)[i] + ',' + upvote[Object.keys(upvote)[i]] + '\n';
+	}
+	fs.writeFile('.upvote', r, (err) =>
 	{
 		if(err)
 		{
@@ -100,7 +105,12 @@ function save_upvote()
 }
 function save_downvote()
 {
-	fs.writeFile('.downvote', downvote, (err) =>
+	var r = '';
+	for(var i = 0; i < Object.keys(downvote).length; i++)
+	{
+		r = r + Object.keys(downvote)[i] + ',' + downvote[Object.keys(downvote)[i]] + '\n';
+	}
+	fs.writeFile('.downvote', r, (err) =>
 	{
 		if(err)
 		{
