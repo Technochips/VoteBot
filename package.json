@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/Technochips/votebot/issues"
   },
-  "homepage": "https://github.com/Technochips/votebot#readme"
+  "homepage": "https://github.com/Technochips/votebot#readme",
+  "dependencies": {
+    "discord.js": "^11.1.0"
+  }
 }
