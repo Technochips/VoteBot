@@ -1,0 +1,17 @@
+{
+  "name": "votebot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Technochips/votebot.git"
+  },
+  "author": "Technochips",
+  "bugs": {
+    "url": "https://github.com/Technochips/votebot/issues"
+  },
+  "homepage": "https://github.com/Technochips/votebot#readme"
+}
