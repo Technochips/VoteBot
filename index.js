@@ -7,6 +7,34 @@ client.on('ready', () =>
 	console.log('Ready');
 });
 
+client.on('messageReactionAdd', (messageReaction, user) => 
+{
+	if(messageReaction.emoji.name == '⬆')
+	{
+		console.log('upvote');
+		//do stuff
+	}
+	else if(messageReaction.emoji.name == '⬇')
+	{
+		console.log('downvote');
+		//do stuff
+	}
+});
+client.on('messageReactionRemove', (messageReaction, user) => 
+{
+	if(messageReaction.emoji.name == '⬆')
+	{
+		console.log('un-upvote');
+		//do stuff
+	}
+	else if(messageReaction.emoji.name == '⬇')
+	{
+		console.log('un-downvote');
+		//do stuff
+	}
+});
+
+
 console.log('Reading token file...');
 fs.readFile('./.token', 'utf8', function(err, data)
 {
