@@ -14,8 +14,8 @@ client.on('ready', () =>
 
 client.on('messageReactionAdd', (messageReaction, user) => 
 {
-	/*if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
-	{*/
+	if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
+	{
 		if(messageReaction.emoji.name == '⬆')
 		{
 			if(upvote[messageReaction.message.author.id] == null)
@@ -32,12 +32,12 @@ client.on('messageReactionAdd', (messageReaction, user) =>
 			}
 			downvote[messageReaction.message.author.id]++;
 		}
-	//}
+	}
 });
 client.on('messageReactionRemove', (messageReaction, user) => 
 {
-	/*if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
-	{*/
+	if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
+	{
 		if(messageReaction.emoji.name == '⬆')
 		{
 			upvote[messageReaction.message.author.id]--;
@@ -46,7 +46,7 @@ client.on('messageReactionRemove', (messageReaction, user) =>
 		{
 			downvote[messageReaction.message.author.id]--;
 		}
-	//}
+	}
 });
 
 client.on('message', message =>
