@@ -59,3 +59,7 @@ typings/
 
 # bot token
 .token
+
+# bot data
+.upvote
+.downvote

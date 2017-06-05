@@ -23,6 +23,7 @@ client.on('messageReactionAdd', (messageReaction, user) =>
 				upvote[messageReaction.message.author.id] = 0;
 			}
 			upvote[messageReaction.message.author.id]++;
+			save_upvote();
 		}
 		else if(messageReaction.emoji.name == '⬇')
 		{
@@ -31,6 +32,7 @@ client.on('messageReactionAdd', (messageReaction, user) =>
 				downvote[messageReaction.message.author.id] = 0;
 			}
 			downvote[messageReaction.message.author.id]++;
+			save_downvote();
 		}
 	}
 });
@@ -41,10 +43,12 @@ client.on('messageReactionRemove', (messageReaction, user) =>
 		if(messageReaction.emoji.name == '⬆')
 		{
 			upvote[messageReaction.message.author.id]--;
+			save_upvote();
 		}
 		else if(messageReaction.emoji.name == '⬇')
 		{
 			downvote[messageReaction.message.author.id]--;
+			save_downvote();
 		}
 	}
 });
@@ -83,3 +87,24 @@ fs.readFile('./.token', 'utf8', function(err, data)
 	console.log('Trying to log-in...');
 	client.login(data);
 });
+
+function save_upvote()
+{
+	fs.writeFile('.upvote', upvote, (err) =>
+	{
+		if(err)
+		{
+			console.log('Couldn\'t save upvotes');
+		}
+	});
+}
+function save_downvote()
+{
+	fs.writeFile('.downvote', downvote, (err) =>
+	{
+		if(err)
+		{
+			console.log('Couldn\'t save downvotes');
+		}
+	});
+}
