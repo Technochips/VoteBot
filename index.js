@@ -12,6 +12,7 @@ load_downvote();
 
 client.on('ready', () =>
 {
+	client.user.setGame(prefix + 'about');
 	console.log('Ready');
 });
 
@@ -71,6 +72,17 @@ client.on('message', message =>
 				downvote[message.author.id] = 0;
 			}
 			message.channel.send('You have ' + (upvote[message.author.id] - downvote[message.author.id]) + ' points.\n⬆: ' + upvote[message.author.id] + '\n⬇: ' + downvote[message.author.id]);
+		}
+		else if(message.cleanContent.startsWith(prefix + 'help'))
+		{
+			message.channel.send('React to someone\'s message with ⬆ or ⬇ to upvote/downvote it.\nExisting commands:\n`' +
+			prefix + 'help` Show this\n`' +
+			prefix + 'about` Show info about this bot\n`' +
+			prefix + 'points` Show the amount of points you have');
+		}
+		else if(message.cleanContent.startsWith(prefix + 'about'))
+		{
+			message.channel.send('Hello. I am VoteBot, a bot that let you upvote other people. I am created by `Technochips`. Type `' + prefix + 'help` to see commands and how to upvote people. https://github.com/Technochips/votebot');
 		}
 	}
 });
