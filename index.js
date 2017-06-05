@@ -12,32 +12,38 @@ client.on('ready', () =>
 
 client.on('messageReactionAdd', (messageReaction, user) => 
 {
-	if(messageReaction.emoji.name == '⬆')
+	if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
 	{
-		if(upvote[messageReaction.message.author.id] == null)
+		if(messageReaction.emoji.name == '⬆')
 		{
-			upvote[messageReaction.message.author.id] = 0;
+			if(upvote[messageReaction.message.author.id] == null)
+			{
+				upvote[messageReaction.message.author.id] = 0;
+			}
+			upvote[messageReaction.message.author.id]++;
 		}
-		upvote[messageReaction.message.author.id]++;
-	}
-	else if(messageReaction.emoji.name == '⬇')
-	{
-		if(downvote[messageReaction.message.author.id] == null)
+		else if(messageReaction.emoji.name == '⬇')
 		{
-			downvote[messageReaction.message.author.id] = 0;
+			if(downvote[messageReaction.message.author.id] == null)
+			{
+				downvote[messageReaction.message.author.id] = 0;
+			}
+			downvote[messageReaction.message.author.id]++;
 		}
-		downvote[messageReaction.message.author.id]++;
 	}
 });
 client.on('messageReactionRemove', (messageReaction, user) => 
 {
-	if(messageReaction.emoji.name == '⬆')
+	if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
 	{
-		upvote[messageReaction.message.author.id]--;
-	}
-	else if(messageReaction.emoji.name == '⬇')
-	{
-		downvote[messageReaction.message.author.id]--;
+		if(messageReaction.emoji.name == '⬆')
+		{
+			upvote[messageReaction.message.author.id]--;
+		}
+		else if(messageReaction.emoji.name == '⬇')
+		{
+			downvote[messageReaction.message.author.id]--;
+		}
 	}
 });
 
