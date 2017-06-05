@@ -7,6 +7,9 @@ const prefix = 'vb!';
 var upvote = {};
 var downvote = {};
 
+load_upvote();
+load_downvote();
+
 client.on('ready', () =>
 {
 	console.log('Ready');
@@ -100,8 +103,10 @@ function save_upvote()
 		if(err)
 		{
 			console.log('Couldn\'t save upvotes');
+			return 1;
 		}
 	});
+	return 0;
 }
 function save_downvote()
 {
@@ -115,6 +120,44 @@ function save_downvote()
 		if(err)
 		{
 			console.log('Couldn\'t save downvotes');
+			return 1;
 		}
 	});
+	return 0;
+}
+function load_upvote()
+{
+	upvote = {};
+	fs.readFile('./.upvote', 'utf8', function(err, data)
+	{
+		if(err)
+		{
+			console.log('Couldn\'t load upvotes');
+			return 1;
+		}
+		var sdata = data.split('\n');
+		for(var i = 0; i < sdata.length; i++)
+		{
+			upvote[sdata[i].split(',')[0]] = sdata[i].split(',')[1];
+		}
+	});
+	return 0;
+}
+function load_downvote()
+{
+	downvote = {};
+	fs.readFile('./.downvote', 'utf8', function(err, data)
+	{
+		if(err)
+		{
+			console.log('Couldn\'t load downvotes');
+			return 1;
+		}
+		var sdata = data.split('\n');
+		for(var i = 0; i < sdata.length; i++)
+		{
+			downvote[sdata[i].split(',')[0]] = sdata[i].split(',')[1];
+		}
+	});
+	return 0;
 }
