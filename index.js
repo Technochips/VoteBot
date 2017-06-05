@@ -2,6 +2,8 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+const prefix = 'vb!';
+
 var upvote = {};
 var downvote = {};
 
@@ -12,8 +14,8 @@ client.on('ready', () =>
 
 client.on('messageReactionAdd', (messageReaction, user) => 
 {
-	if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
-	{
+	/*if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
+	{*/
 		if(messageReaction.emoji.name == '⬆')
 		{
 			if(upvote[messageReaction.message.author.id] == null)
@@ -30,12 +32,12 @@ client.on('messageReactionAdd', (messageReaction, user) =>
 			}
 			downvote[messageReaction.message.author.id]++;
 		}
-	}
+	//}
 });
 client.on('messageReactionRemove', (messageReaction, user) => 
 {
-	if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
-	{
+	/*if(user != messageReaction.message.author && !messageReaction.message.author.bot && !user.bot)
+	{*/
 		if(messageReaction.emoji.name == '⬆')
 		{
 			upvote[messageReaction.message.author.id]--;
@@ -44,9 +46,27 @@ client.on('messageReactionRemove', (messageReaction, user) =>
 		{
 			downvote[messageReaction.message.author.id]--;
 		}
-	}
+	//}
 });
 
+client.on('message', message =>
+{
+	if(!message.author.bot)
+	{
+		if(message.cleanContent.startsWith(prefix + 'points'))
+		{
+			if(upvote[message.author.id] == null)
+			{
+				upvote[message.author.id] = 0;
+			}
+			if(downvote[message.author.id] == null)
+			{
+				downvote[message.author.id] = 0;
+			}
+			message.channel.send('You have ' + (upvote[message.author.id] - downvote[message.author.id]) + ' points.\n⬆: ' + upvote[message.author.id] + '\n⬇: ' + downvote[message.author.id]);
+		}
+	}
+});
 
 console.log('Reading token file...');
 fs.readFile('./.token', 'utf8', function(err, data)
